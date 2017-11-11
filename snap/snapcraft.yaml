@@ -1,0 +1,20 @@
+name: fast
+version: git
+version-script: |
+  GIT_DIR=parts/fast-cli/src/.git git describe --tags | sed s/^v//
+summary: Test your download speed using fast.com
+description: |
+  Test your download speed using fast.com.
+grade: stable
+confinement: strict
+
+apps:
+  fast:
+    command: bin/fast
+    plugs: [network]
+
+parts:
+  fast-cli:
+    plugin: nodejs
+    node-engine: 8.1.1
+    source: https://github.com/sindresorhus/fast-cli.git
